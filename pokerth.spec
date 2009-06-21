@@ -1,6 +1,6 @@
 Name:		pokerth
 Version:	0.7
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	A Texas-Holdem poker game
 Group:		Amusements/Games
 License:	GPLv2+
@@ -17,7 +17,7 @@ BuildRequires:	boost-devel >= 1.37
 BuildRequires:	SDL_mixer-devel
 
 # Removed bundled fonts
-Requires:	bitstream-vera-sans-fonts
+Requires:	dejavu-sans-fonts
 Requires:	urw-fonts
 
 %description
@@ -55,7 +55,7 @@ rm %{buildroot}%{_datadir}/%{name}/data/fonts/{VeraBd.ttf,c059013l.pfb,n019003l.
 # and replace them with symlinks
 ln -s %{_datadir}/fonts/default/Type1/c059013l.pfb %{buildroot}%{_datadir}/%{name}/data/fonts/
 ln -s %{_datadir}/fonts/default/Type1/n019003l.pfb %{buildroot}%{_datadir}/%{name}/data/fonts/
-ln -s %{_datadir}/fonts/bitstream-vera/VeraBd.ttf %{buildroot}%{_datadir}/%{name}/data/fonts/
+ln -s %{_datadir}/fonts/dejavu/DejaVuSans.ttf %{buildroot}%{_datadir}/%{name}/data/fonts/
 
 # Install desktop file
 desktop-file-install --remove-category="Qt" --dir=%{buildroot}%{_datadir}/applications %{name}.desktop 
@@ -74,6 +74,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Jun 21 2009 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.7-4
+- Fix BZ #507131.
+
 * Sun Jun 14 2009 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.7-3
 - Removed BR: asio-devel.
 - Changed BR on boost to >= 1.37.
