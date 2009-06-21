@@ -1,6 +1,6 @@
 Name:		pokerth
 Version:	0.7
-Release:	4%{?dist}
+Release:	5%{?dist}
 Summary:	A Texas-Holdem poker game
 Group:		Amusements/Games
 License:	GPLv2+
@@ -55,7 +55,7 @@ rm %{buildroot}%{_datadir}/%{name}/data/fonts/{VeraBd.ttf,c059013l.pfb,n019003l.
 # and replace them with symlinks
 ln -s %{_datadir}/fonts/default/Type1/c059013l.pfb %{buildroot}%{_datadir}/%{name}/data/fonts/
 ln -s %{_datadir}/fonts/default/Type1/n019003l.pfb %{buildroot}%{_datadir}/%{name}/data/fonts/
-ln -s %{_datadir}/fonts/dejavu/DejaVuSans.ttf %{buildroot}%{_datadir}/%{name}/data/fonts/
+ln -s %{_datadir}/fonts/dejavu/DejaVuSans-Bold.ttf %{buildroot}%{_datadir}/%{name}/data/fonts/VeraBd.ttf
 
 # Install desktop file
 desktop-file-install --remove-category="Qt" --dir=%{buildroot}%{_datadir}/applications %{name}.desktop 
@@ -74,6 +74,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Jun 21 2009 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.7-5
+- Use bold style instead of book style.
+
 * Sun Jun 21 2009 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.7-4
 - Fix BZ #507131.
 
