@@ -1,11 +1,13 @@
 Name:		pokerth
 Version:	0.7.1
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	A Texas-Holdem poker game
 Group:		Amusements/Games
 License:	GPLv2+
 URL:		http://www.pokerth.net
 Source0:	http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.tar.bz2
+# Patch to include all necessary libraries in linking phase
+Patch0:		pokerth-libs.patch
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
 BuildRequires:	desktop-file-utils
@@ -28,6 +30,7 @@ is available for Linux, Windows, and MacOSX.
 
 %prep
 %setup -q -n PokerTH-%{version}-src
+%patch0 -p1 -b .libs
 # Fix permissions
 chmod 644 ChangeLog
 find . -name *.h -exec chmod 644 {} \;
@@ -74,6 +77,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Jun 03 2010 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.7.1-4
+- Fix FTBFS caused by implicit DSO linking in rawhide.
+
 * Thu Jan 21 2010 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.7.1-3
 - Bump spec due to change of boost soname.
 
