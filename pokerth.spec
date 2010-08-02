@@ -1,6 +1,6 @@
 Name:		pokerth
 Version:	0.7.1
-Release:	4%{?dist}
+Release:	5%{?dist}
 Summary:	A Texas-Holdem poker game
 Group:		Amusements/Games
 License:	GPLv2+
@@ -77,6 +77,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Aug 02 2010 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.7.1-5
+- Bump spec due to boost upgrade.
+
 * Thu Jun 03 2010 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.7.1-4
 - Fix FTBFS caused by implicit DSO linking in rawhide.
 
