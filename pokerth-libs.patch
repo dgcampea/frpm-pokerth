@@ -1,99 +1,12 @@
-diff -up PokerTH-0.7.1-src/pokerth_game.pro.orig PokerTH-0.7.1-src/pokerth_game.pro
---- PokerTH-0.7.1-src/pokerth_game.pro.orig	2009-06-26 02:29:19.000000000 +0300
-+++ PokerTH-0.7.1-src/pokerth_game.pro	2010-06-03 00:08:23.095328246 +0300
-@@ -360,6 +360,7 @@ unix:!mac { 
-     LIBPATH += lib
-     LIB_DIRS = $${PREFIX}/lib \
-         $${PREFIX}/lib64
-+
-     BOOST_FS = boost_filesystem \
-         boost_filesystem-mt
-     BOOST_THREAD = boost_thread \
-@@ -368,40 +369,48 @@ unix:!mac { 
-         boost_iostreams-mt
-     BOOST_REGEX = boost_regex \
-         boost_regex-mt
--    
-+    BOOST_SYS = boost_system \
-+        boost_system-mt
-+
-     # searching in $PREFIX/lib and $PREFIX/lib64
-     # to override the default '/usr' pass PREFIX
-     # variable to qmake.
--    for(dir, LIB_DIRS):exists($$dir) { 
--        for(lib, BOOST_THREAD):exists($${dir}/lib$${lib}.so*) { 
-+    for(dir, LIB_DIRS):exists($$dir) {
-+        for(lib, BOOST_THREAD):exists($${dir}/lib$${lib}.so*) {
-             message("Found $$lib")
-             BOOST_THREAD = -l$$lib
-         }
--        for(lib, BOOST_FS):exists($${dir}/lib$${lib}.so*) { 
-+        for(lib, BOOST_FS):exists($${dir}/lib$${lib}.so*) {
-             message("Found $$lib")
-             BOOST_FS = -l$$lib
-         }
--        for(lib, BOOST_IOSTREAMS):exists($${dir}/lib$${lib}.so*) { 
-+        for(lib, BOOST_IOSTREAMS):exists($${dir}/lib$${lib}.so*) {
-             message("Found $$lib")
-             BOOST_IOSTREAMS = -l$$lib
-         }
--        for(lib, BOOST_REGEX):exists($${dir}/lib$${lib}.so*) { 
-+        for(lib, BOOST_REGEX):exists($${dir}/lib$${lib}.so*) {
-             message("Found $$lib")
-             BOOST_REGEX = -l$$lib
-         }
-+        for(lib, BOOST_SYS):exists($${dir}/lib$${lib}.so*) {
-+            message("Found $$lib")
-+            BOOST_SYS = -l$$lib
-+        }
-     }
-     BOOST_LIBS = $$BOOST_THREAD \
-         $$BOOST_FS \
-         $$BOOST_IOSTREAMS \
--        $$BOOST_REGEX
--    !count(BOOST_LIBS, 4):error("Unable to find boost libraries in PREFIX=$${PREFIX}")
-+        $$BOOST_REGEX \
-+        $$BOOST_SYS
-+    !count(BOOST_LIBS, 5):error("Unable to find boost libraries in PREFIX=$${PREFIX}")
-+
-     if($$system(sdl-config --version)):error("sdl-config not found in PATH - libSDL_mixer, libSDL are required!")
-     UNAME = $$system(uname -s)
-     BSD = $$find(UNAME, "BSD")
-     kFreeBSD = $$find(UNAME, "kFreeBSD")
-     LIBS += -lpokerth_lib
+diff -up PokerTH-0.8-2490svn/pokerth_game.pro.orig PokerTH-0.8-2490svn/pokerth_game.pro
+--- PokerTH-0.8-2490svn/pokerth_game.pro.orig	2010-08-23 00:42:55.740949492 +0300
++++ PokerTH-0.8-2490svn/pokerth_game.pro	2010-08-23 01:02:02.790949570 +0300
+@@ -416,7 +416,7 @@ unix:!mac { 
+         -lpokerth_db \
+         -lpokerth_protocol
      LIBS += $$BOOST_LIBS
 -    LIBS += -lSDL_mixer \
 +    LIBS += -lSDL -lSDL_mixer \
-         -lcurl
-     !isEmpty( BSD ) && isEmpty( kFreeBSD ):LIBS += -lcrypto
-     else:LIBS += -lgnutls-openssl \
-diff -up PokerTH-0.7.1-src/pokerth_server.pro.orig PokerTH-0.7.1-src/pokerth_server.pro
---- PokerTH-0.7.1-src/pokerth_server.pro.orig	2009-06-26 02:29:46.000000000 +0300
-+++ PokerTH-0.7.1-src/pokerth_server.pro	2010-06-03 00:45:56.656243385 +0300
-@@ -191,6 +191,7 @@ unix : !mac {
-         BOOST_PROGRAM_OPTIONS = boost_program_options boost_program_options-mt
-         BOOST_IOSTREAMS = boost_iostreams boost_iostreams-mt
- 	BOOST_REGEX = boost_regex boost_regex-mt
-+	BOOST_SYS = boost_system boost_system-mt
- 
-         #
-         # searching in $PREFIX/lib and $PREFIX/lib64
-@@ -229,10 +230,16 @@ unix : !mac {
-                         BOOST_REGEX = -l$$lib
-                     }
-                 }
-+                for(lib, BOOST_SYS){
-+                    exists($${dir}/lib$${lib}.so*){
-+                        message("Found $$lib")
-+                        BOOST_SYS = -l$$lib
-+                    }
-+                }
-             }
-         }
--        BOOST_LIBS = $$BOOST_THREAD $$BOOST_FS $$BOOST_PROGRAM_OPTIONS $$BOOST_IOSTREAMS $$BOOST_REGEX
--        !count(BOOST_LIBS, 5){
-+        BOOST_LIBS = $$BOOST_THREAD $$BOOST_FS $$BOOST_PROGRAM_OPTIONS $$BOOST_IOSTREAMS $$BOOST_REGEX $$BOOST_SYS
-+        !count(BOOST_LIBS, 6){
-             error("Unable to find boost libraries in PREFIX=$${PREFIX}")
-         }
- 
+         -lcurl \
+         -lgsasl
+     !isEmpty( BSD ):isEmpty( kFreeBSD ):LIBS += -lcrypto

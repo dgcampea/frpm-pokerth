@@ -1,11 +1,14 @@
+%global betarel beta3
+
 Name:		pokerth
-Version:	0.7.1
-Release:	5%{?dist}
+Version:	0.8
+Release:	0.1.%{betarel}%{?dist}
 Summary:	A Texas-Holdem poker game
 Group:		Amusements/Games
 License:	GPLv2+
 URL:		http://www.pokerth.net
-Source0:	http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.tar.bz2
+Source0:	http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-%{betarel}-src.tar.bz2
+#Source0:	http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.tar.bz2
 # Patch to include all necessary libraries in linking phase
 Patch0:		pokerth-libs.patch
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
@@ -17,6 +20,7 @@ BuildRequires:	libcurl-devel
 BuildRequires:	gnutls-devel
 BuildRequires:	boost-devel >= 1.37
 BuildRequires:	SDL_mixer-devel
+BuildRequires:	libgsasl-devel
 
 # Removed bundled fonts
 Requires:	dejavu-sans-fonts
@@ -29,8 +33,10 @@ play network games with people all over the world. This poker engine
 is available for Linux, Windows, and MacOSX.
 
 %prep
-%setup -q -n PokerTH-%{version}-src
+#%setup -q -n PokerTH-%{version}-src
+%setup -q -n PokerTH-%{version}-%{betarel}-src
 %patch0 -p1 -b .libs
+
 # Fix permissions
 chmod 644 ChangeLog
 find . -name *.h -exec chmod 644 {} \;
@@ -75,8 +81,10 @@ rm -rf %{buildroot}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
 
-
 %changelog
+* Tue Sep 07 2010 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.8-0.1.beta3
+- Upgrade to 0.8 series due to boost incompatibility.
+
 * Mon Aug 02 2010 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.7.1-5
 - Bump spec due to boost upgrade.
 
