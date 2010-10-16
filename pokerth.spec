@@ -1,14 +1,11 @@
-%global betarel beta3
-
 Name:		pokerth
-Version:	0.8
-Release:	0.1.%{betarel}%{?dist}
+Version:	0.8.1
+Release:	1%{?dist}
 Summary:	A Texas-Holdem poker game
 Group:		Amusements/Games
 License:	GPLv2+
 URL:		http://www.pokerth.net
-Source0:	http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-%{betarel}-src.tar.bz2
-#Source0:	http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.tar.bz2
+Source0:	http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.tar.bz2
 # Patch to include all necessary libraries in linking phase
 Patch0:		pokerth-libs.patch
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
@@ -33,8 +30,7 @@ play network games with people all over the world. This poker engine
 is available for Linux, Windows, and MacOSX.
 
 %prep
-#%setup -q -n PokerTH-%{version}-src
-%setup -q -n PokerTH-%{version}-%{betarel}-src
+%setup -q -n PokerTH-%{version}-src
 %patch0 -p1 -b .libs
 
 # Fix permissions
@@ -82,6 +78,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Sun Oct 17 2010 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.8.1-1
+- Update to 0.8.1.
+
 * Tue Sep 07 2010 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.8-0.1.beta3
 - Upgrade to 0.8 series due to boost incompatibility.
 
