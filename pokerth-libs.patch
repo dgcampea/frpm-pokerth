@@ -1,12 +1,12 @@
-diff -up PokerTH-0.8-2490svn/pokerth_game.pro.orig PokerTH-0.8-2490svn/pokerth_game.pro
---- PokerTH-0.8-2490svn/pokerth_game.pro.orig	2010-08-23 00:42:55.740949492 +0300
-+++ PokerTH-0.8-2490svn/pokerth_game.pro	2010-08-23 01:02:02.790949570 +0300
-@@ -416,7 +416,7 @@ unix:!mac { 
-         -lpokerth_db \
-         -lpokerth_protocol
-     LIBS += $$BOOST_LIBS
--    LIBS += -lSDL_mixer \
-+    LIBS += -lSDL -lSDL_mixer \
-         -lcurl \
-         -lgsasl
-     !isEmpty( BSD ):isEmpty( kFreeBSD ):LIBS += -lcrypto
+diff -up PokerTH-0.8.2-src/pokerth_game.pro.orig PokerTH-0.8.2-src/pokerth_game.pro
+--- PokerTH-0.8.2-src/pokerth_game.pro.orig	2011-01-05 19:32:18.144452611 +0200
++++ PokerTH-0.8.2-src/pokerth_game.pro	2011-01-05 19:38:22.628858433 +0200
+@@ -449,7 +449,7 @@ unix:!mac { 
+ 	kFreeBSD = $$find(UNAME, "kFreeBSD")
+ 	LIBS += -lsqlite3
+ 	LIBS += $$BOOST_LIBS
+-	LIBS += -lSDL_mixer \
++	LIBS += -lSDL -lSDL_mixer \
+ 		-lgsasl
+ 	!isEmpty( BSD ):isEmpty( kFreeBSD ):LIBS += -lcrypto
+ 	else:LIBS += -lgnutls-openssl \

@@ -6,7 +6,7 @@ Group:		Amusements/Games
 License:	GPLv2+
 URL:		http://www.pokerth.net
 Source0:	http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.tar.bz2
-# Patch to include all necessary libraries in linking phase
+# Patch to add missing libs to linker line
 Patch0:		pokerth-libs.patch
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
@@ -18,6 +18,7 @@ BuildRequires:	gnutls-devel
 BuildRequires:	boost-devel >= 1.37
 BuildRequires:	SDL_mixer-devel
 BuildRequires:	libgsasl-devel
+BuildRequires:	sqlite-devel
 
 # Removed bundled fonts
 Requires:	dejavu-sans-fonts
