@@ -1,5 +1,5 @@
 Name:		pokerth
-Version:	0.8.1
+Version:	0.8.2
 Release:	1%{?dist}
 Summary:	A Texas-Holdem poker game
 Group:		Amusements/Games
@@ -78,6 +78,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Wed Jan 05 2011 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.8.2-1
+- Update to 0.8.2.
+
 * Sun Oct 17 2010 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.8.1-1
 - Update to 0.8.1.
 
