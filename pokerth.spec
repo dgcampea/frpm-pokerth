@@ -1,13 +1,11 @@
 Name:		pokerth
-Version:	0.8.2
+Version:	0.8.3
 Release:	1%{?dist}
 Summary:	A Texas-Holdem poker game
 Group:		Amusements/Games
 License:	GPLv2+
 URL:		http://www.pokerth.net
 Source0:	http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.tar.bz2
-# Patch to add missing libs to linker line
-Patch0:		pokerth-libs.patch
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
 BuildRequires:	desktop-file-utils
@@ -32,7 +30,6 @@ is available for Linux, Windows, and MacOSX.
 
 %prep
 %setup -q -n PokerTH-%{version}-src
-%patch0 -p1 -b .libs
 
 # Fix permissions
 chmod 644 ChangeLog
@@ -79,6 +76,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Tue Jan 18 2011 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.8.3-1
+- Update to 0.8.3.
+
 * Wed Jan 05 2011 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.8.2-1
 - Update to 0.8.2.
 
