@@ -1,6 +1,6 @@
 Name:		pokerth
 Version:	0.8.3
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	A Texas-Holdem poker game
 Group:		Amusements/Games
 License:	GPLv2+
@@ -76,6 +76,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Wed Feb 09 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.8.3-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
+
 * Mon Feb 07 2011 Thomas Spura <tomspur@fedoraproject.org> - 0.8.3-2
 - rebuild for new boost
 
