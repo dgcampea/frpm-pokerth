@@ -1,11 +1,14 @@
 Name:		pokerth
 Version:	0.8.3
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	A Texas-Holdem poker game
 Group:		Amusements/Games
 License:	GPLv2+
 URL:		http://www.pokerth.net
 Source0:	http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.tar.bz2
+# Patch to fix build against newer versions of Boost. Already reported and 
+# fixed upstream.
+Patch0:		pokerth-0.8.3-filesystem.patch
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
 BuildRequires:	desktop-file-utils
@@ -30,6 +33,7 @@ is available for Linux, Windows, and MacOSX.
 
 %prep
 %setup -q -n PokerTH-%{version}-src
+%patch0 -p1
 
 # Fix permissions
 chmod 644 ChangeLog
@@ -42,6 +46,7 @@ for file in *.pro; do
 done
 
 %build
+export CXXFLAGS="%{optflags} -DBOOST_FILESYSTEM_VERSION=2"
 %{_qt4_qmake} pokerth.pro
 make %{?_smp_mflags}
 
@@ -76,6 +81,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Sun Feb 20 2011 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.8.3-x
+- Fix build against new boost.
+
 * Wed Feb 09 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.8.3-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
