@@ -1,32 +1,33 @@
-Name:		pokerth
-Version:	0.8.3
-Release:	8%{?dist}
-Summary:	A Texas-Holdem poker game
-Group:		Amusements/Games
-License:	GPLv2+
-URL:		http://www.pokerth.net
-Source0:	http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.tar.bz2
+Name:           pokerth
+Version:        0.8.3
+Release:        8%{?dist}
+Summary:        A Texas-Holdem poker game
+Group:          Amusements/Games
+License:        GPLv2+
+URL:            http://www.pokerth.net
+Source0:        http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.tar.bz2
 # Patch to fix build against newer versions of Boost. Already reported and 
 # fixed upstream.
-Patch0:		pokerth-0.8.3-filesystem.patch
-BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
+Patch0:         pokerth-0.8.3-filesystem.patch
+Patch1:         pokerth-0.8.3-gnutls-only.patch
+BuildRoot:      %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
-BuildRequires:	desktop-file-utils
-BuildRequires:	qt4-devel
-BuildRequires:	zlib-devel
-BuildRequires:	libcurl-devel
-BuildRequires:	gnutls-devel
-BuildRequires:	boost-devel >= 1.37
-BuildRequires:	SDL_mixer-devel
-BuildRequires:	libgsasl-devel
-BuildRequires:	sqlite-devel
+BuildRequires:  desktop-file-utils
+BuildRequires:  qt4-devel
+BuildRequires:  zlib-devel
+BuildRequires:  libcurl-devel
+BuildRequires:  gnutls-devel
+BuildRequires:  boost-devel >= 1.37
+BuildRequires:  SDL_mixer-devel
+BuildRequires:  libgsasl-devel
+BuildRequires:  sqlite-devel
 
 # Removed bundled fonts
-Requires:	dejavu-sans-fonts
-Requires:	urw-fonts
+Requires:       dejavu-sans-fonts
+Requires:       urw-fonts
 
 %description
-PokerTH is a poker game written in C++/QT4. You can play the popular
+PokerTH is a poker game written in C++/Qt4. You can play the popular
 "Texas Hold'em" poker variant against up to six computer-opponents or
 play network games with people all over the world. This poker engine
 is available for Linux, Windows, and MacOSX.
@@ -34,6 +35,7 @@ is available for Linux, Windows, and MacOSX.
 %prep
 %setup -q -n PokerTH-%{version}-src
 %patch0 -p1
+%patch1 -p1
 
 # Fix permissions
 chmod 644 ChangeLog
@@ -81,6 +83,10 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Sun Oct 9 2011 Ryan Rix <ry@n.rix.si> - 0.8.3-9
+- Grammar and update to personal specifications
+- Apply patch to fix GNUTLS issues from Paul Frields <pfrields at fedoraproject dot org>
+
 * Fri Jul 29 2011 Jussi Lehtola <jussilehtola@fedoraproject.org> - 0.8.3-8
 - Bump spec due to new gnutls.
 
