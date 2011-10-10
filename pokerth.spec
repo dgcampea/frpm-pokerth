@@ -1,6 +1,6 @@
 Name:           pokerth
 Version:        0.8.3
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        A Texas-Holdem poker game
 Group:          Amusements/Games
 License:        GPLv2+
