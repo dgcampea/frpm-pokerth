@@ -1,6 +1,6 @@
 Name:           pokerth
 Version:        0.8.3
-Release:        11%{?dist}
+Release:        12%{?dist}
 Summary:        A Texas-Holdem poker game
 Group:          Amusements/Games
 License:        GPLv2+
@@ -10,6 +10,7 @@ Source0:        http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.
 # fixed upstream.
 Patch0:         pokerth-0.8.3-filesystem.patch
 Patch1:         pokerth-0.8.3-gnutls-only.patch
+Patch2:         pokerth-gcc47.patch
 BuildRoot:      %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
 BuildRequires:  desktop-file-utils
@@ -36,6 +37,7 @@ is available for Linux, Windows, and MacOSX.
 %setup -q -n PokerTH-%{version}-src
 %patch0 -p1
 %patch1 -p1
+%patch2
 
 # Fix permissions
 chmod 644 ChangeLog
@@ -83,6 +85,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Mon Jan 30 2012 Bruno Wolff III <bruno@wolff.to> - 0.8.3-12
+- Fix for gcc 4.7
+
 * Sat Jan 14 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.8.3-11
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
 
