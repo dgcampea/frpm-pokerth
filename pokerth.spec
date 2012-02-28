@@ -1,6 +1,6 @@
 Name:           pokerth
 Version:        0.8.3
-Release:        12%{?dist}
+Release:        13%{?dist}
 Summary:        A Texas-Holdem poker game
 Group:          Amusements/Games
 License:        GPLv2+
@@ -85,6 +85,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Tue Feb 28 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.8.3-13
+- Rebuilt for c++ ABI breakage
+
 * Mon Jan 30 2012 Bruno Wolff III <bruno@wolff.to> - 0.8.3-12
 - Fix for gcc 4.7
 
