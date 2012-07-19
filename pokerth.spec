@@ -1,6 +1,6 @@
 Name:           pokerth
 Version:        0.9.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Texas-Holdem poker game
 Group:          Amusements/Games
 License:        GPLv2+
@@ -20,7 +20,8 @@ BuildRequires:  boost-devel >= 1.37
 BuildRequires:  SDL_mixer-devel
 BuildRequires:  libgsasl-devel
 BuildRequires:  sqlite-devel
-BuildRequires: libircclient-devel
+BuildRequires:  libircclient-devel
+BuildRequires:  tinyxml-devel
 
 # Removed bundled fonts
 Requires:       dejavu-sans-fonts
@@ -82,6 +83,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Thu Jul 19 2012 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 0.9.5-2
+- add missing BR tinyxml-devel
+
 * Tue Jul 17 2012 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 0.9.5-1
 - new version
 
