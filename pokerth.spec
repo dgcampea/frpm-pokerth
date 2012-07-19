@@ -1,17 +1,15 @@
 Name:           pokerth
-Version:        0.8.3
-Release:        13%{?dist}
+Version:        0.9.5
+Release:        1%{?dist}
 Summary:        A Texas-Holdem poker game
 Group:          Amusements/Games
 License:        GPLv2+
 URL:            http://www.pokerth.net
 Source0:        http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.tar.bz2
-# Patch to fix build against newer versions of Boost. Already reported and 
-# fixed upstream.
-Patch0:         pokerth-0.8.3-filesystem.patch
+
+Patch0:         fix-libircclient-include.patch
 Patch1:         pokerth-0.8.3-gnutls-only.patch
 Patch2:         pokerth-gcc47.patch
-BuildRoot:      %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  qt4-devel
@@ -22,6 +20,7 @@ BuildRequires:  boost-devel >= 1.37
 BuildRequires:  SDL_mixer-devel
 BuildRequires:  libgsasl-devel
 BuildRequires:  sqlite-devel
+BuildRequires: libircclient-devel
 
 # Removed bundled fonts
 Requires:       dejavu-sans-fonts
@@ -35,9 +34,9 @@ is available for Linux, Windows, and MacOSX.
 
 %prep
 %setup -q -n PokerTH-%{version}-src
-%patch0 -p1
-%patch1 -p1
-%patch2
+%patch0 -p2
+#%patch1 -p1
+#%patch2
 
 # Fix permissions
 chmod 644 ChangeLog
@@ -62,11 +61,9 @@ make install INSTALL_ROOT=%{buildroot} COPY="cp -p -f"
 install -D -p -m 755 %{name} %{buildroot}%{_bindir}/%{name}
 install -D -p -m 755 bin/%{name}_server %{buildroot}%{_bindir}/%{name}_server
 
-# Remove bundled fonts
-rm %{buildroot}%{_datadir}/%{name}/data/fonts/{VeraBd.ttf,c059013l.pfb,n019003l.pfb}
 # and replace them with symlinks
 ln -s %{_datadir}/fonts/default/Type1/c059013l.pfb %{buildroot}%{_datadir}/%{name}/data/fonts/
-ln -s %{_datadir}/fonts/default/Type1/n019003l.pfb %{buildroot}%{_datadir}/%{name}/data/fonts/
+#ln -s %{_datadir}/fonts/default/Type1/n019003l.pfb %{buildroot}%{_datadir}/%{name}/data/fonts/
 ln -s %{_datadir}/fonts/dejavu/DejaVuSans-Bold.ttf %{buildroot}%{_datadir}/%{name}/data/fonts/VeraBd.ttf
 
 # Install desktop file
@@ -85,6 +82,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Tue Jul 17 2012 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 0.9.5-1
+- new version
+
 * Tue Feb 28 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.8.3-13
 - Rebuilt for c++ ABI breakage
 
