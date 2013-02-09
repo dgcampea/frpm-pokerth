@@ -1,6 +1,6 @@
 Name:           pokerth
 Version:        0.9.5
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        A Texas-Holdem poker game
 Group:          Amusements/Games
 License:        GPLv2+
@@ -83,6 +83,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Sat Feb 09 2013 Denis Arnaud <denis.arnaud_fedora@m4x.org> - 0.9.5-5
+- Rebuild for Boost-1.53.0
+
 * Sun Aug 12 2012 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 0.9.5-4
 - rebuilt for new boost
 
