@@ -1,6 +1,6 @@
 Name:           pokerth
-Version:        0.9.5
-Release:        6%{?dist}
+Version:        1.0
+Release:        1%{?dist}
 Summary:        A Texas-Holdem poker game
 Group:          Amusements/Games
 License:        GPLv2+
@@ -9,7 +9,6 @@ Source0:        http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.
 
 Patch0:         fix-libircclient-include.patch
 Patch1:         pokerth-0.8.3-gnutls-only.patch
-Patch2:         pokerth-gcc47.patch
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  qt4-devel
@@ -22,6 +21,8 @@ BuildRequires:  libgsasl-devel
 BuildRequires:  sqlite-devel
 BuildRequires:  libircclient-devel
 BuildRequires:  tinyxml-devel
+# src/third_party/protobuf/pokerth.pb.h includes google/protobuf/stubs/common.h
+BuildRequires:	protobuf-devel
 
 # Removed bundled fonts
 Requires:       dejavu-sans-fonts
@@ -37,7 +38,6 @@ is available for Linux, Windows, and MacOSX.
 %setup -q -n PokerTH-%{version}-src
 %patch0 -p2
 #%patch1 -p1
-#%patch2
 
 # Fix permissions
 chmod 644 ChangeLog
@@ -83,6 +83,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Mon Feb 18 2013 Adam Williamson <awilliam@redhat.com> - 1.0-1
+- new release 1.0
+
 * Sun Feb 10 2013 Denis Arnaud <denis.arnaud_fedora@m4x.org> - 0.9.5-6
 - Rebuild for Boost-1.53.0
 
