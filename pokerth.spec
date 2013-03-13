@@ -1,6 +1,6 @@
 Name:           pokerth
 Version:        1.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Texas-Holdem poker game
 Group:          Amusements/Games
 License:        GPLv2+
@@ -83,6 +83,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Tue Mar 12 2013 Ryan Rix <ry@n.rix.si> - 1.0-2
+- Rebuild for protobuf soname bump
+
 * Mon Feb 18 2013 Adam Williamson <awilliam@redhat.com> - 1.0-1
 - new release 1.0
 
