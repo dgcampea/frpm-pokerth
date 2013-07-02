@@ -1,12 +1,11 @@
-diff -ruNP a/PokerTH-0.9.5-src/src/net/common/ircthread.cpp b/PokerTH-0.9.5-src/src/net/common/ircthread.cpp
---- a/PokerTH-0.9.5-src/src/net/common/ircthread.cpp	2012-06-21 17:54:49.000000000 -0300
-+++ b/PokerTH-0.9.5-src/src/net/common/ircthread.cpp	2012-07-17 21:59:08.711718602 -0300
-@@ -19,7 +19,7 @@
+--- PokerTH-1.0.1-src/src/net/common/ircthread.cpp	2013-04-07 05:04:27.006209660 -0700
++++ PokerTH-1.0.1-src/src/net/common/ircthread.cpp.new	2013-07-02 16:08:09.153632418 -0700
+@@ -32,7 +32,7 @@
  #include <net/socket_helper.h>
  #include <net/ircthread.h>
  #include <net/socket_msg.h>
 -#include <libircclient/libircclient.h>
 +#include <libircclient.h>
- #include <boost/algorithm/string/predicate.hpp>
- #include <queue>
- #include <sstream>
+ 
+ // We need to do the following to handle different versions of libircclient.
+ // Sadly, libircclient doesn't have actual definitions for its versions in its headers.

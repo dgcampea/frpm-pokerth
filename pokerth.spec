@@ -3,7 +3,8 @@ Version:        1.0.1
 Release:        1%{?dist}
 Summary:        A Texas-Holdem poker game
 Group:          Amusements/Games
-License:        GPLv2+
+# Has a typical OpenSSL linking exception
+License:        AGPLv3+ with exceptions
 URL:            http://www.pokerth.net
 Source0:        http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.tar.bz2
 
@@ -36,7 +37,7 @@ is available for Linux, Windows, and MacOSX.
 
 %prep
 %setup -q -n PokerTH-%{version}-src
-%patch0 -p2
+%patch0 -p1
 #%patch1 -p1
 
 # Fix permissions
@@ -84,7 +85,9 @@ rm -rf %{buildroot}
 
 %changelog
 * Tue Jul 02 2013 Adam Williamson <awilliam@redhat.com> - 1.0.1-1
-* new upstream bugfix release 1.0.1
+- new upstream bugfix release 1.0.1
+- correct license to 'AGPLv3+ with exceptions'
+- re-diff fix-libircclient-include.patch
 
 * Tue Mar 12 2013 Ryan Rix <ry@n.rix.si> - 1.0-2
 - Rebuild for protobuf soname bump
