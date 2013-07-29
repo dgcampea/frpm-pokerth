@@ -24,6 +24,7 @@ BuildRequires:  libircclient-devel
 BuildRequires:  tinyxml-devel
 # src/third_party/protobuf/pokerth.pb.h includes google/protobuf/stubs/common.h
 BuildRequires:	protobuf-devel
+BuildRequires:  libgcrypt-devel
 
 # Removed bundled fonts
 Requires:       dejavu-sans-fonts
@@ -84,7 +85,10 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
-* Sat Jul 27 2013 pmachata@redhat.com - 1.0.1-2
+* Mon Jul 29 2013 Adam Williamson <awilliam@redhat.com> - 1.0.1-2
+- buildrequires libgcrypt-devel
+
+* Sat Jul 27 2013 pmachata@redhat.com
 - Rebuild for boost 1.54.0
 
 * Tue Jul 02 2013 Adam Williamson <awilliam@redhat.com> - 1.0.1-1
