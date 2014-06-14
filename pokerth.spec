@@ -1,6 +1,6 @@
 Name:           pokerth
 Version:        1.1.1
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        A Texas-Holdem poker game
 Group:          Amusements/Games
 # Has a typical OpenSSL linking exception
@@ -10,7 +10,7 @@ Source0:        http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.
 
 Patch0:         fix-libircclient-include.patch
 Patch1:         pokerth-0.8.3-gnutls-only.patch
-Patch2:         pokerth-1.0.1-system-qtsingleapp.patch
+Patch2:         pokerth-1.1.1-system-qtsingleapp.patch
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  qt4-devel
@@ -89,6 +89,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Fri Jun 13 2014 Ryan Rix <ry@n.rix.si> - 1.1.1-5
+- Re-generate Ville's patch to work with PokerTH 1.1.1
+
 * Fri Jun 13 2014 Ville Skyttä <ville.skytta@iki.fi> - 1.1.1-4
 - Use system qtsingleappliaction instead of bundled one
 
