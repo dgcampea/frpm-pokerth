@@ -1,6 +1,6 @@
 Name:           pokerth
 Version:        1.1.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A Texas-Holdem poker game
 Group:          Amusements/Games
 # Has a typical OpenSSL linking exception
@@ -10,9 +10,11 @@ Source0:        http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.
 
 Patch0:         fix-libircclient-include.patch
 Patch1:         pokerth-0.8.3-gnutls-only.patch
+Patch2:         pokerth-1.0.1-system-qtsingleapp.patch
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  qt4-devel
+BuildRequires:  qtsingleapplication-devel
 BuildRequires:  zlib-devel
 BuildRequires:  libcurl-devel
 BuildRequires:  gnutls-devel
@@ -40,6 +42,8 @@ is available for Linux, Windows, and MacOSX.
 %setup -q -n PokerTH-%{version}-src
 %patch0 -p1
 #%patch1 -p1
+%patch2 -p1
+rm -r src/third_party/qtsingleapplication
 
 # Fix permissions
 chmod 644 ChangeLog
@@ -85,6 +89,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Fri Jun 13 2014 Ville Skyttä <ville.skytta@iki.fi> - 1.1.1-4
+- Use system qtsingleappliaction instead of bundled one
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.1.1-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 

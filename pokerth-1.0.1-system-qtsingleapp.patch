@@ -1,0 +1,30 @@
+diff -up PokerTH-1.0.1-src/pokerth_game.pro~ PokerTH-1.0.1-src/pokerth_game.pro
+--- PokerTH-1.0.1-src/pokerth_game.pro~	2014-04-15 23:27:44.709027307 +0300
++++ PokerTH-1.0.1-src/pokerth_game.pro	2014-04-15 23:56:07.524187532 +0300
+@@ -10,13 +10,13 @@ isEmpty( PREFIX ){
+ TEMPLATE = app
+ CODECFORSRC = UTF-8
+ CONFIG += qt \
++	qtsingleapplication \
+ 	thread \
+ 	embed_manifest_exe \
+ 	exceptions \
+ 	rtti \
+ 	stl \
+ 	warn_on
+-include(src/third_party/qtsingleapplication/qtsingleapplication.pri)
+ QT += sql
+ UI_DIR = uics
+ MOC_DIR = mocs
+diff -up PokerTH-1.0.1-src/src/pokerth.cpp~ PokerTH-1.0.1-src/src/pokerth.cpp
+--- PokerTH-1.0.1-src/src/pokerth.cpp~	2013-04-07 15:04:27.017209721 +0300
++++ PokerTH-1.0.1-src/src/pokerth.cpp	2014-04-15 23:56:44.168872338 +0300
+@@ -49,7 +49,7 @@
+ #include "startsplash.h"
+ #include "game_defs.h"
+ #include <net/socket_startup.h>
+-#include <third_party/qtsingleapplication/qtsingleapplication.h>
++#include <QtSingleApplication>
+ 
+ #ifdef _MSC_VER
+ #ifdef _DEBUG
