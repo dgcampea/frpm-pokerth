@@ -1,6 +1,6 @@
 Name:           pokerth
 Version:        1.1.1
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        A Texas-Holdem poker game
 Group:          Amusements/Games
 # Has a typical OpenSSL linking exception
@@ -89,6 +89,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Sun Aug 17 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.1.1-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
 * Fri Jun 13 2014 Ryan Rix <ry@n.rix.si> - 1.1.1-5
 - Re-generate Ville's patch to work with PokerTH 1.1.1
 
