@@ -1,6 +1,6 @@
 Name:           pokerth
 Version:        1.1.1
-Release:        12%{?dist}
+Release:        13%{?dist}
 Summary:        A Texas-Holdem poker game
 Group:          Amusements/Games
 # Has a typical OpenSSL linking exception
@@ -11,6 +11,13 @@ Source0:        http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.
 Patch0:         fix-libircclient-include.patch
 Patch1:         pokerth-0.8.3-gnutls-only.patch
 Patch2:         pokerth-1.1.1-system-qtsingleapp.patch
+# https://github.com/pokerth/pokerth/pull/299
+Patch3:         pokerth-1.1.1-fstream-ambiguity.patch
+# https://github.com/zaphoyd/websocketpp/issues/457
+Patch4:         pokerth-1.1.1-ownerless.patch
+# Upstream patches for C++11 support
+Patch5:         pokerth-1.1.1-cxx11-build.patch
+Patch6:         pokerth-1.1.1-cxx11-fixes.patch
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  qt4-devel
@@ -43,6 +50,10 @@ is available for Linux, Windows, and MacOSX.
 %patch0 -p1
 #%patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
 rm -r src/third_party/qtsingleapplication
 
 # Fix permissions
@@ -89,6 +100,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Fri Jan 29 2016 Jonathan Wakely <jwakely@redhat.com> 1.1.1-13
+- Patched and rebuilt for GCC 6 and Boost 1.60.0
+
 * Thu Aug 27 2015 Jonathan Wakely <jwakely@redhat.com> - 1.1.1-12
 - Rebuilt for Boost 1.59
 
