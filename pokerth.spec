@@ -1,6 +1,6 @@
 Name:           pokerth
 Version:        1.1.1
-Release:        13%{?dist}
+Release:        14%{?dist}
 Summary:        A Texas-Holdem poker game
 Group:          Amusements/Games
 # Has a typical OpenSSL linking exception
@@ -68,7 +68,7 @@ done
 
 %build
 export CXXFLAGS="%{optflags} -DBOOST_FILESYSTEM_VERSION=2"
-%{_qt4_qmake} pokerth.pro
+%{qmake_qt4} pokerth.pro
 make %{?_smp_mflags}
 
 
@@ -100,6 +100,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Wed Feb 03 2016 Rex Dieter <rdieter@fedoraproject.org> - 1.1.1-14
+- use %%qmake_qt4 macro to ensure proper build flags
+
 * Fri Jan 29 2016 Jonathan Wakely <jwakely@redhat.com> 1.1.1-13
 - Patched and rebuilt for GCC 6 and Boost 1.60.0
 
