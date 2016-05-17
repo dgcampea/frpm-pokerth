@@ -1,6 +1,6 @@
 Name:           pokerth
 Version:        1.1.1
-Release:        15%{?dist}
+Release:        16%{?dist}
 Summary:        A Texas-Holdem poker game
 Group:          Amusements/Games
 # Has a typical OpenSSL linking exception
@@ -99,6 +99,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Tue May 17 2016 Jonathan Wakely <jwakely@redhat.com> - 1.1.1-16
+- Rebuilt for linker errors in boost (#1331983)
+
 * Fri Feb 19 2016 Yaakov Selkowitz <yselkowi@redhat.com> - 1.1.1-15
 - Fix build with Boost >= 1.50 now that CXXFLAGS are respected (#1305225)
 
