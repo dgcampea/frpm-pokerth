@@ -1,6 +1,6 @@
 Name:           pokerth
 Version:        1.1.1
-Release:        16%{?dist}
+Release:        17%{?dist}
 Summary:        A Texas-Holdem poker game
 Group:          Amusements/Games
 # Has a typical OpenSSL linking exception
@@ -99,6 +99,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Thu Jul 21 2016 Jonathan Wakely <jwakely@redhat.com> - 1.1.1-17
+- Rebuild to switch back to old sendmsg/recvmsg symbols (#1344830)
+
 * Tue May 17 2016 Jonathan Wakely <jwakely@redhat.com> - 1.1.1-16
 - Rebuilt for linker errors in boost (#1331983)
 
