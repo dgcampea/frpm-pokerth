@@ -1,6 +1,6 @@
 Name:           pokerth
 Version:        1.1.1
-Release:        27%{?dist}
+Release:        28%{?dist}
 Summary:        A Texas-Holdem poker game
 Group:          Amusements/Games
 # Has a typical OpenSSL linking exception
@@ -99,6 +99,9 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Wed Nov 29 2017 Igor Gnatenko <ignatenko@redhat.com> - 1.1.1-28
+- Rebuild for protobuf 3.5
+
 * Mon Nov 13 2017 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 1.1.1-27
 - Rebuild for protobuf 3.4
 
