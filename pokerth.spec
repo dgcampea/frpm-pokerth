@@ -86,9 +86,6 @@ ln -s %{_datadir}/fonts/dejavu/DejaVuSans-Bold.ttf %{buildroot}%{_datadir}/%{nam
 # Install desktop file
 desktop-file-install --remove-category="Qt" --dir=%{buildroot}%{_datadir}/applications %{name}.desktop 
 
-%clean
-rm -rf %{buildroot}
-
 %files
 %defattr(-,root,root,-)
 %doc COPYING ChangeLog TODO
