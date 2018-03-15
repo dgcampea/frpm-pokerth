@@ -1,23 +1,11 @@
 Name:           pokerth
-Version:        1.1.1
-Release:        29%{?dist}
+Version:        1.1.2
+Release:        1%{?dist}
 Summary:        A Texas-Holdem poker game
-Group:          Amusements/Games
 # Has a typical OpenSSL linking exception
 License:        AGPLv3+ with exceptions
 URL:            http://www.pokerth.net
-Source0:        http://downloads.sourceforge.net/%{name}/PokerTH-%{version}-src.tar.bz2
-
-Patch0:         fix-libircclient-include.patch
-Patch1:         pokerth-0.8.3-gnutls-only.patch
-Patch2:         pokerth-1.1.1-system-qtsingleapp.patch
-# https://github.com/pokerth/pokerth/pull/299
-Patch3:         pokerth-1.1.1-fstream-ambiguity.patch
-# https://github.com/zaphoyd/websocketpp/issues/457
-Patch4:         pokerth-1.1.1-ownerless.patch
-# Upstream patches for C++11 support
-Patch5:         pokerth-1.1.1-cxx11-build.patch
-Patch6:         pokerth-1.1.1-cxx11-fixes.patch
+Source0:        http://downloads.sourceforge.net/%{name}/pokerth-%{version}.tar.gz
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  qt4-devel
@@ -32,9 +20,9 @@ BuildRequires:  sqlite-devel
 BuildRequires:  libircclient-devel
 BuildRequires:  tinyxml-devel
 # src/third_party/protobuf/pokerth.pb.h includes google/protobuf/stubs/common.h
-BuildRequires:	protobuf-devel
+BuildRequires:  protobuf-devel
 BuildRequires:  libgcrypt-devel
-
+BuildRequires:  gcc-c++
 # Removed bundled fonts
 Requires:       dejavu-sans-fonts
 Requires:       urw-fonts
@@ -46,42 +34,25 @@ play network games with people all over the world. This poker engine
 is available for Linux, Windows, and MacOSX.
 
 %prep
-%setup -q -n PokerTH-%{version}-src
-%patch0 -p1
-#%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-rm -r src/third_party/qtsingleapplication
-
-# Fix permissions
-chmod 644 ChangeLog
-find . -name *.h -exec chmod 644 {} \;
-find . -name *.cpp -exec chmod 644 {} \;
-
-# Remove option that breaks build from qmake files
-for file in *.pro; do
- sed -i "s|-no_dead_strip_inits_and_terms||g" $file
-done
+%setup -q -n pokerth-%{version}-rc
 
 %build
 %{qmake_qt4} pokerth.pro
 make %{?_smp_mflags}
+%{qmake_qt4} pokerth_game.pro
+make %{?_smp_mflags}
 
 
 %install
-rm -rf %{buildroot} 
 make install INSTALL_ROOT=%{buildroot} COPY="cp -p -f"
 # Ugh, binary isn't automatically installed
-install -D -p -m 755 %{name} %{buildroot}%{_bindir}/%{name}
+#install -D -p -m 755 %{name} %{buildroot}%{_bindir}/%{name}
 install -D -p -m 755 bin/%{name}_server %{buildroot}%{_bindir}/%{name}_server
 
 # and replace them with symlinks
-ln -s %{_datadir}/fonts/default/Type1/c059013l.pfb %{buildroot}%{_datadir}/%{name}/data/fonts/
+#ln -s %{_datadir}/fonts/default/Type1/c059013l.pfb %{buildroot}%{_datadir}/%{name}/data/fonts/
 #ln -s %{_datadir}/fonts/default/Type1/n019003l.pfb %{buildroot}%{_datadir}/%{name}/data/fonts/
-ln -s %{_datadir}/fonts/dejavu/DejaVuSans-Bold.ttf %{buildroot}%{_datadir}/%{name}/data/fonts/VeraBd.ttf
+#ln -s %{_datadir}/fonts/dejavu/DejaVuSans-Bold.ttf %{buildroot}%{_datadir}/%{name}/data/fonts/VeraBd.ttf
 
 # Install desktop file
 desktop-file-install --remove-category="Qt" --dir=%{buildroot}%{_datadir}/applications %{name}.desktop 
@@ -96,6 +67,10 @@ desktop-file-install --remove-category="Qt" --dir=%{buildroot}%{_datadir}/applic
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Thu Mar 15 2018 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 1.1.2-1
+- add gcc-c++ into buildrequires
+- 1.1.2
+
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.1-29
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
