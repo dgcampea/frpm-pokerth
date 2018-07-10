@@ -58,7 +58,6 @@ install -D -p -m 755 bin/%{name}_server %{buildroot}%{_bindir}/%{name}_server
 desktop-file-install --remove-category="Qt" --dir=%{buildroot}%{_datadir}/applications %{name}.desktop 
 
 %files
-%defattr(-,root,root,-)
 %doc COPYING ChangeLog TODO
 %{_bindir}/%{name}
 %{_bindir}/%{name}_server
