@@ -1,6 +1,6 @@
 Name:           pokerth
 Version:        1.1.2
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        A Texas-Holdem poker game
 # Has a typical OpenSSL linking exception
 License:        AGPLv3+ with exceptions
@@ -69,6 +69,9 @@ desktop-file-install --remove-category="Qt" --dir=%{buildroot}%{_datadir}/applic
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Wed Jan 30 2019 Jonathan Wakely <jwakely@redhat.com> - 1.1.2-5
+- Rebuilt for Boost 1.69
+
 * Wed Nov 21 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 1.1.2-4
 - Rebuild for protobuf 3.6
 
