@@ -1,6 +1,6 @@
 Name:           pokerth
 Version:        1.1.2
-Release:        12%{?dist}
+Release:        13%{?dist}
 Summary:        A Texas-Holdem poker game
 # Has a typical OpenSSL linking exception
 License:        AGPLv3+ with exceptions
@@ -27,6 +27,8 @@ BuildRequires:  gcc-c++
 Requires:       dejavu-sans-fonts
 Requires:       urw-fonts
 Patch0:         pokerth-1.1.2.patch
+Patch1:         pokerth-1.1.2.patch.2019
+Patch2:         396.patch
 
 %description
 PokerTH is a poker game written in C++/Qt4. You can play the popular
@@ -37,6 +39,8 @@ is available for Linux, Windows, and MacOSX.
 %prep
 %setup -q -n pokerth-%{version}-rc
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 
@@ -69,6 +73,9 @@ desktop-file-install --remove-category="Qt" --dir=%{buildroot}%{_datadir}/applic
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
+* Mon Sep 28 22:57:04 -03 2020 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 1.1.2-13
+- apply patch from archlinux and gentoo to make it build again
+
 * Sat Aug 01 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.2-12
 - Second attempt - Rebuilt for
   https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
