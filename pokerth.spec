@@ -7,6 +7,7 @@ License:        AGPLv3+ with exceptions
 URL:            http://www.pokerth.net
 Source0:        http://downloads.sourceforge.net/%{name}/pokerth-%{version}.tar.gz
 
+BuildRequires: make
 BuildRequires:  desktop-file-utils
 BuildRequires:  qt4-devel
 BuildRequires:  qtsingleapplication-devel
