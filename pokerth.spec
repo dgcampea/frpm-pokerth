@@ -6,6 +6,7 @@ Summary:        A Texas-Holdem poker game
 License:        AGPLv3+ with exceptions
 URL:            http://www.pokerth.net
 Source0:        http://downloads.sourceforge.net/%{name}/pokerth-%{version}.tar.gz
+Source1:        pokerth.xml
 
 BuildRequires: make
 BuildRequires:  desktop-file-utils
@@ -31,11 +32,24 @@ Patch0:         pokerth-1.1.2.patch
 Patch1:         pokerth-1.1.2.patch.2019
 Patch2:         396.patch
 
+BuildRequires:  firewalld-filesystem
+Requires:       (pokerth-firewalld = %{version}-%{release} if firewalld)
+
 %description
 PokerTH is a poker game written in C++/Qt4. You can play the popular
 "Texas Hold'em" poker variant against up to six computer-opponents or
 play network games with people all over the world. This poker engine
 is available for Linux, Windows, and MacOSX.
+
+
+%package firewalld
+Summary: FirewallD metadata file for PokerTH
+Requires: firewalld-filesystem
+Requires(post): firewalld-filesystem
+
+%description firewalld
+This package contains FirewallD file for PokerTH.
+
 
 %prep
 %setup -q -n pokerth-%{version}-rc
@@ -65,6 +79,12 @@ install -D -p -m 755 bin/%{name}_server %{buildroot}%{_bindir}/%{name}_server
 # Install desktop file
 desktop-file-install --remove-category="Qt" --dir=%{buildroot}%{_datadir}/applications %{name}.desktop 
 
+# Install firewalld metadata
+install -D -p -m 0644 %{SOURCE1} %{buildroot}%{_prefix}/lib/firewalld/services/pokerth.xml
+
+%post firewalld
+%firewalld_reload
+
 %files
 %doc COPYING ChangeLog TODO
 %{_bindir}/%{name}
@@ -72,6 +92,9 @@ desktop-file-install --remove-category="Qt" --dir=%{buildroot}%{_datadir}/applic
 %{_datadir}/%{name}/
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
+
+%files firewalld
+%{_prefix}/lib/firewalld/services/pokerth.xml
 
 %changelog
 * Sat Nov 06 2021 Adrian Reber <adrian@lisas.de> - 1.1.2-20

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <short>pokerth</short>
+  <description>PokerTH is a service to host network games for local or remote clients. Enable this option if remote hosts need to connect to a PokerTH instance running on this machine.</description>
+  <port port="7234" protocol="tcp"/>
+</service>
+
